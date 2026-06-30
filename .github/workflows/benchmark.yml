@@ -23,7 +23,7 @@ jobs:
       - shell: bash
         run: |
           pip install pytest-benchmark[histogram]
-          pip install tslearn==0.7         
+          pip install tslearn[all_features]==0.7         
         name: 'Install tslearn'
       - shell: bash
         run: |
@@ -32,7 +32,7 @@ jobs:
       - shell: bash
         run: |
           pip install pytest-benchmark[histogram]
-          pip install tslearn==0.8         
+          pip install tslearn[all_features]==0.8         
         name: 'Install tslearn'
       - shell: bash
         run: |
@@ -41,7 +41,7 @@ jobs:
       - shell: bash
         run: |
           pip install pytest-benchmark[histogram]
-          pip install https://github.com/tslearn-team/tslearn/archive/main.zip
+          pip install 'tslearn[all_features] @ https://github.com/tslearn-team/tslearn/archive/main.zip'
         name: 'Install tslearn'
       - shell: bash
         run: |
