@@ -1,0 +1,60 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "greet"
+  benchmark:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+            python-version: "3.12"
+        name: 'Setup python'
+      - shell: bash
+        run: |
+          pip install pytest-benchmark[histogram]
+          pip install tslearn==0.7         
+        name: 'Install tslearn'
+      - shell: bash
+        run: |
+          pytest --benchmark-save=tslearn_0.7
+        name: 'Run benchmark'
+      - shell: bash
+        run: |
+          pip install pytest-benchmark[histogram]
+          pip install tslearn==0.8         
+        name: 'Install tslearn'
+      - shell: bash
+        run: |
+          pytest --benchmark-save=tslearn_0.8
+        name: 'Run benchmark'
+      - shell: bash
+        run: |
+          pip install pytest-benchmark[histogram]
+          pip install https://github.com/tslearn-team/tslearn/archive/main.zip
+        name: 'Install tslearn'
+      - shell: bash
+        run: |
+          pytest --benchmark-save=tslearn_latest
+        name: 'Run benchmark'
+      - shell: bash
+        run: |
+          pytest-benchmark compare --histogram benchmark
+        name: 'Run benchmark'
+      - name: Upload
+        uses: actions/upload-artifact@v7
+        with:
+          path: benchmark.svg
+          archive: false
+          
+      
