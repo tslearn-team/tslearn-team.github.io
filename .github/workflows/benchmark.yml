@@ -17,30 +17,19 @@ jobs:
       - shell: bash
         run: |
           pip install pytest-benchmark[histogram]
-          pip install tslearn[all_features]~=0.7.0
-        name: 'Install tslearn'
+        name: 'Install pytest-benchmark'
       - shell: bash
         run: |
-          pytest --benchmark-save=0.7
-        name: 'Run benchmark'
+          pip install tslearn[all_features]~=0.7.0 && pytest --benchmark-save=0.7
+        name: 'Benchmark v0.7'
       - shell: bash
         run: |
-          pip install pytest-benchmark[histogram]
-          pip install tslearn[all_features]~=0.8.0
-        name: 'Install tslearn'
+          pip install tslearn[all_features]~=0.8.0 && pytest --benchmark-save=0.8
+        name: 'Benchmark v0.8'
       - shell: bash
         run: |
-          pytest --benchmark-save=0.8
-        name: 'Run benchmark'
-      - shell: bash
-        run: |
-          pip install pytest-benchmark[histogram]
-          pip install 'tslearn[all_features] @ https://github.com/tslearn-team/tslearn/archive/main.zip'
-        name: 'Install tslearn'
-      - shell: bash
-        run: |
-          pytest --benchmark-save=latest
-        name: 'Run benchmark'
+          pip install 'tslearn[all_features] @ https://github.com/tslearn-team/tslearn/archive/main.zip' && pytest --benchmark-save=latest
+        name: 'Benchmark latest'
       - shell: bash
         run: |
           pytest-benchmark compare --group-by func --histogram benchmark
