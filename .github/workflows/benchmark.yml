@@ -55,6 +55,3 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           path: benchmark*.svg
-          archive: false
-          
-      
