@@ -49,7 +49,7 @@ jobs:
         name: 'Run benchmark'
       - shell: bash
         run: |
-          pytest-benchmark compare --histogram benchmark
+          pytest-benchmark compare --group-by func --histogram benchmark
         name: 'Run benchmark'
       - name: Upload
         uses: actions/upload-artifact@v7
