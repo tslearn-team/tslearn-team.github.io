@@ -50,11 +50,11 @@ jobs:
       - shell: bash
         run: |
           pytest-benchmark compare --group-by func --histogram benchmark
-        name: 'Run benchmark'
+        name: 'Compare benchmark'
       - name: Upload
         uses: actions/upload-artifact@v7
         with:
-          path: benchmark.svg
+          path: benchmark*
           archive: false
           
       
