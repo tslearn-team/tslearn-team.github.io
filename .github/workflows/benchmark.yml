@@ -1,17 +1,11 @@
-# This is a basic workflow that is manually triggered
-
 name: Benchmark
 
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
+
   benchmark:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     steps:
@@ -23,20 +17,20 @@ jobs:
       - shell: bash
         run: |
           pip install pytest-benchmark[histogram]
-          pip install tslearn[all_features]==0.7         
+          pip install tslearn[all_features]~=0.7.0
         name: 'Install tslearn'
       - shell: bash
         run: |
-          pytest --benchmark-save=tslearn_0.7
+          pytest --benchmark-save=0.7
         name: 'Run benchmark'
       - shell: bash
         run: |
           pip install pytest-benchmark[histogram]
-          pip install tslearn[all_features]==0.8         
+          pip install tslearn[all_features]~=0.8.0
         name: 'Install tslearn'
       - shell: bash
         run: |
-          pytest --benchmark-save=tslearn_0.8
+          pytest --benchmark-save=0.8
         name: 'Run benchmark'
       - shell: bash
         run: |
@@ -45,7 +39,7 @@ jobs:
         name: 'Install tslearn'
       - shell: bash
         run: |
-          pytest --benchmark-save=tslearn_latest
+          pytest --benchmark-save=latest
         name: 'Run benchmark'
       - shell: bash
         run: |
