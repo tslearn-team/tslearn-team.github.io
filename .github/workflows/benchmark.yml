@@ -28,6 +28,10 @@ jobs:
         name: 'Benchmark v0.8'
       - shell: bash
         run: |
+          pip install tslearn[all_features]~=0.9.0 && pytest --benchmark-save=0.9
+        name: 'Benchmark v0.9'
+      - shell: bash
+        run: |
           pip install 'tslearn[all_features] @ https://github.com/tslearn-team/tslearn/archive/main.zip' && pytest --benchmark-save=latest
         name: 'Benchmark latest'
       - shell: bash
