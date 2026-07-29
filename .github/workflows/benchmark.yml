@@ -46,6 +46,9 @@ jobs:
         name: 'Compare benchmark'
       - name: Upload pages artifact
         uses: actions/upload-artifact@v7
+        with:
+          # upload entire directory
+          path: '.'
       - name: Deploy pages
         id: deployment
         uses: actions/deploy-pages@v4
