@@ -6,6 +6,7 @@ import torch
 
 from tslearn.metrics import soft_dtw
 from tslearn.metrics import cdist_soft_dtw
+from tslearn.metrics import SoftDTWLossPyTorch
 from tslearn.barycenters import softdtw_barycenter
 
 
@@ -52,3 +53,9 @@ def test_soft_dtw_barycenter(benchmark, n_ts, sz, n_jobs):
         benchmark(softdtw_barycenter, X, max_iter=1, n_jobs=n_jobs)
     else:
         benchmark(softdtw_barycenter, X, max_iter=1)
+
+
+@pytest.mark.parametrize("n_ts, sz", [(10, 100), (10, 1000), (100, 1000)])
+def test_SoftDTWLossPyTorch(benchmark, n_ts, sz):
+    X = torch.rand((n_ts, sz, 2))
+    benchmark(SoftDTWLossPyTorch().forward, X, X)
