@@ -32,13 +32,16 @@ jobs:
         name: 'Benchmark v0.9'
       - shell: bash
         run: |
-          pip install 'tslearn[all_features] @ https://github.com/tslearn-team/tslearn/archive/main.zip' && pytest --benchmark-save=latest
+          pip install 'tslearn[all_features] @ https://github.com/tslearn-team/tslearn/archive/main.zip' && pytest --benchmark-save=latest -k "test_dtw_numpy"
         name: 'Benchmark latest'
       - shell: bash
         run: |
           pytest-benchmark compare --group-by name --histogram benchmark
         name: 'Compare benchmark'
-      - name: Upload
-        uses: actions/upload-artifact@v7
-        with:
-          path: benchmark*.svg
+#      - name: Upload pages artifact
+#        uses: actions/upload-artifact@v7
+#        with:
+#          path: benchmark*.svg
+      - name: Deploy pages
+        id: deployment
+        uses: actions/deploy-pages@v4
