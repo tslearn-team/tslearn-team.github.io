@@ -22,19 +22,19 @@ jobs:
         name: 'Install pytest-benchmark'
       - shell: bash
         run: |
-          pip install tslearn[all_features]~=0.7.0 && pytest --benchmark-save=0.7 -k "test_dtw_numpy"
+          pip install tslearn[all_features]~=0.7.0 && pytest --benchmark-save=0.7
         name: 'Benchmark v0.7'
       - shell: bash
         run: |
-          pip install tslearn[all_features]~=0.8.0 && pytest --benchmark-save=0.8 -k "test_dtw_numpy"
+          pip install tslearn[all_features]~=0.8.0 && pytest --benchmark-save=0.8
         name: 'Benchmark v0.8'
       - shell: bash
         run: |
-          pip install tslearn[all_features]~=0.9.0 && pytest --benchmark-save=0.9 -k "test_dtw_numpy"
+          pip install tslearn[all_features]~=0.9.0 && pytest --benchmark-save=0.9
         name: 'Benchmark v0.9'
       - shell: bash
         run: |
-          pip install 'tslearn[all_features] @ https://github.com/tslearn-team/tslearn/archive/main.zip' && pytest --benchmark-save=latest -k "test_dtw_numpy"
+          pip install 'tslearn[all_features] @ https://github.com/tslearn-team/tslearn/archive/main.zip' && pytest --benchmark-save=latest
         name: 'Benchmark latest'
       - shell: bash
         run: |
