@@ -6,6 +6,8 @@ on:
 jobs:
 
   benchmark:
+
+
     runs-on: ubuntu-latest
 
     steps:
@@ -36,9 +38,27 @@ jobs:
         name: 'Benchmark latest'
       - shell: bash
         run: |
-          pytest-benchmark compare --group-by name --histogram benchmark
+          pytest-benchmark compare --group-by name --histogram benchmark/$(date --utc +%F-%T) && zip -rj tslearn_benchmark.zip benchmark/*
         name: 'Compare benchmark'
-      - name: Upload
-        uses: actions/upload-artifact@v7
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: benchmark*.svg
+          # upload entire directory
+          path: '.'
+
+  deploy:
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+        name: github-pages
+        url: ${{steps.deployment.outputs.page_url}}
+    runs-on: ubuntu-latest
+    needs: benchmark
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
