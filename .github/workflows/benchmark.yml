@@ -38,7 +38,7 @@ jobs:
         name: 'Benchmark latest'
       - shell: bash
         run: |
-          pytest-benchmark compare --group-by name --histogram 'benchmark/<date>_<time>' && zip -r benchmark.zip benchmark/*
+          pytest-benchmark compare --group-by name --histogram benchmark/$(date --utc +%F-%T) && zip -r tslearn_benchmark.zip benchmark/*
         name: 'Compare benchmark'
       - name: Setup Pages
         uses: actions/configure-pages@v5
